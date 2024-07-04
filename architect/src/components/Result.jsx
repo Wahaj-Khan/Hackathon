@@ -1,34 +1,94 @@
-import { Link } from 'react-router-dom';
+import { useRef, useEffect, useState, forwardRef } from "react";
+import { Link } from "react-router-dom";
 import { FaFilePdf } from "react-icons/fa6";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import ReactMarkdown from "react-markdown";
+import { useGeneratedArchitecture } from "../context/ArchitectureContext";
+
+// Define a forwardRef wrapper for ReactMarkdown
+const MarkdownWrapper = forwardRef(({ children }, ref) => (
+  <div ref={ref}>
+    <ReactMarkdown>{children}</ReactMarkdown>
+  </div>
+));
 
 const ResultPage = () => {
-    // const location = useLocation();
-    // const { text } = location.state || { text: '' };
+  const { generatedArchitecture } = useGeneratedArchitecture();
+  const pdfContentRef = useRef(null);
+  const [isMarkdownRendered, setIsMarkdownRendered] = useState(false);
 
-    return (
-        <div className="flex flex-col items-center justify-center mt-32 mb-8">
-            <div className="w-full text-center max-w-3xl bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-2xl font-bold text-white mb-4">Architecture</h2>
-                <div className="flex flex-col w-full">
-                    <p className='text-white text-justify'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet consectetur adipiscing elit pellentesque habitant. Vulputate odio ut enim blandit volutpat maecenas volutpat. In pellentesque massa placerat duis ultricies lacus. Quis risus sed vulputate odio. Leo integer malesuada nunc vel. Urna duis convallis convallis tellus. Neque sodales ut etiam sit amet nisl. Risus feugiat in ante metus dictum at tempor commodo ullamcorper. Amet consectetur adipiscing elit ut aliquam purus sit amet. Ut tristique et egestas quis ipsum suspendisse ultrices. Lectus nulla at volutpat diam ut venenatis. Ac turpis egestas integer eget aliquet. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Et netus et malesuada fames ac turpis. Hendrerit gravida rutrum quisque non tellus orci ac. Tristique nulla aliquet enim tortor at. Amet consectetur adipiscing elit pellentesque.
-                        <br />
-                        <br />
-                        Fermentum leo vel orci porta non. Orci sagittis eu volutpat odio facilisis mauris sit. Duis at tellus at urna condimentum mattis pellentesque id nibh. Faucibus et molestie ac feugiat sed lectus vestibulum. Gravida in fermentum et sollicitudin ac orci phasellus. Commodo elit at imperdiet dui accumsan sit amet nulla. Non nisi est sit amet facilisis. Et odio pellentesque diam volutpat commodo sed egestas egestas. Viverra ipsum nunc aliquet bibendum enim facilisis gravida neque. Mauris a diam maecenas sed enim ut sem viverra. Ut porttitor leo a diam sollicitudin tempor id eu. In egestas erat imperdiet sed. Tristique senectus et netus et malesuada fames ac turpis. Enim neque volutpat ac tincidunt. Condimentum vitae sapien pellentesque habitant morbi. Consectetur adipiscing elit ut aliquam purus. Morbi tristique senectus et netus et malesuada fames ac turpis.
-                    </p>
-                    <Link to="/" >
-                        <button className="w-full bg-gradient-to-r from-indigo-500 to-blue-700 text-xl text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-700 hover:to-blue-800 transition ease-in-out duration-150">
-                            Go Back
-                        </button>
-                    </Link>
-                    <button className="bg-gradient-to-r from-indigo-500 to-blue-700 text-xl text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-700 hover:to-blue-800 transition ease-in-out duration-150">
-                        Download
-                        <FaFilePdf className="inline ml-2" size={22} />
-                    </button>
-                </div>
-            </div>
+  useEffect(() => {
+    // Check if ReactMarkdown has rendered content into pdfContentRef
+    if (pdfContentRef.current) {
+      setIsMarkdownRendered(true);
+    }
+  }, [generatedArchitecture]);
+
+  const handleDownloadPdf = () => {
+    if (!isMarkdownRendered) {
+      return; // Exit early if Markdown content is not rendered yet
+    }
+
+    const doc = new jsPDF();
+
+    // Add a heading
+    doc.setFontSize(18);
+    doc.text("Architecture Document", 105, 20, { align: "center" });
+
+    // Add a border
+    doc.setLineWidth(0.5);
+    doc.rect(5, 5, 200, 287); // Border around the entire page
+
+    // Get the text content of the markdown rendered content
+    const content = pdfContentRef.current;
+    const text = content.innerText;
+
+    // Split the text into lines that fit within the PDF's width
+    const lines = doc.splitTextToSize(text, 285); // Adjust width to fit the text properly
+
+    // Add the paragraph text
+    doc.setFontSize(12);
+    doc.text(lines, 10, 30); // Adjust starting y-coordinate if necessary
+
+    // Add page numbers
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.text(`Page ${i} of ${pageCount}`, 200, 285, { align: "right" });
+    }
+
+    // Save the PDF
+    doc.save("architecture.pdf");
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center mt-32 mb-8">
+      <div className="w-full max-w-6xl bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 className="text-4xl text-center font-bold text-white mb-4">
+          Architecture
+        </h2>
+        <div className="flex flex-col w-full text-2xl text-white ">
+          <MarkdownWrapper ref={pdfContentRef}>
+            {generatedArchitecture}
+          </MarkdownWrapper>
+
+          <Link to="/">
+            <button className="w-full bg-gradient-to-r mt-16 text-2xl from-indigo-500 to-blue-700 text-xl text-white font-bold py-3 px-4 rounded-md mt-4 hover:bg-indigo-700 hover:to-blue-800 transition ease-in-out duration-150">
+              Generate Another
+            </button>
+          </Link>
+          <button
+            onClick={handleDownloadPdf}
+            className="bg-gradient-to-r text-2xl from-indigo-500 to-blue-700 text-xl text-white font-bold py-3 px-4 rounded-md mt-4 hover:bg-indigo-700 hover:to-blue-800 transition ease-in-out duration-150"
+          >
+            Download
+            <FaFilePdf className="inline ml-2" size={22} />
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default ResultPage;
