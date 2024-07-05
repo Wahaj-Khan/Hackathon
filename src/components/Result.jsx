@@ -66,7 +66,7 @@ const ResultPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center mt-32 mb-8">
-      <div className="w-full max-w-2xl bg-gray-800 rounded-lg shadow-md p-6">
+      <div className="w-[90%] sm:w-full max-w-2xl bg-gray-800 rounded-lg shadow-md p-6">
         <h2 className="text-2xl text-center font-bold text-white mb-4">
           Architecture
         </h2>
