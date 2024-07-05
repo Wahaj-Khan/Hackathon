@@ -133,7 +133,7 @@ const Home = () => {
               </h2>
               <form onSubmit={handleSubmit} className="flex flex-col">
                 <textarea
-                  placeholder="Enter project details..."
+                  placeholder="Enter details like: Your business problem statement, functional and non-functional requirements, scope, expected traffic, budget and timeline, examples and references or any other information related to your project."
                   className="bg-gray-700 h-52 text-gray-100 border-0 rounded-md p-2 mb-4 mt-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                   name="feedback"
                   value={requirements}

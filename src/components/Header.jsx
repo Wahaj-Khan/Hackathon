@@ -10,17 +10,6 @@ const Header = () => {
         >
           AI Software Architect
         </Link>
-        <div className="flex items-center space-x-8 mr-10">
-          <Link to="/">
-            <p className="text-white text-lg hover:text-blue-400 hover:scale-105 transition duration-200">
-              Home
-            </p>
-          </Link>
-
-          <p className="text-white text-lg hover:text-blue-400 hover:scale-105 transition duration-200 cursor-not-allowed">
-            Result
-          </p>
-        </div>
       </div>
     </header>
   );
