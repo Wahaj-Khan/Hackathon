@@ -33,6 +33,7 @@ const Home = () => {
     const randomIndex = Math.floor(Math.random() * dummyProjects.length);
     const randomProject = dummyProjects[randomIndex];
     setRequirements(randomProject.description);
+    setErrorFlag(false);
   };
 
   const handleSubmit = async (e) => {
@@ -109,7 +110,7 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <div className="relative w-full flex justify-center">
+          <div className="relative w-[70%] sm:w-full flex justify-between sm:justify-center mt-14 sm:mt-0">
             <button className="relative" onClick={handleRandomDetailsHandler}>
               <Lottie
                 options={defaultOption2}
@@ -126,9 +127,9 @@ const Home = () => {
           </div>
           <div className="flex flex-col items-center justify-center w-5/6 mt-3">
             <div
-              className={`w-full text-center max-w-xl bg-gray-800 rounded-lg shadow-md p-6`}
+              className="w-full text-center max-w-xl bg-gray-800 rounded-lg mt-6 sm:mt-0 p-6"
             >
-              <h2 className="text-2xl font-bold text-white mb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
                 Enter Your Project Details
               </h2>
               <form onSubmit={handleSubmit} className="flex flex-col">
@@ -150,7 +151,7 @@ const Home = () => {
                 </button>
               </form>
               {errorFlag && (
-                <p className="text-red-600 mt-4">
+                <p className="text-red-600 text-sm sm:text-base mt-4">
                   Please provide the project requirements
                 </p>
               )}
