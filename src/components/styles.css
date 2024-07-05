@@ -1,0 +1,31 @@
+.markdown {
+  h2 {
+    margin: 15px 0 10px 0;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  h3,
+  h4,
+  h5 {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  li {
+    list-style: circle;
+    margin-left: 25px;
+  }
+  p,
+  ul {
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes animate-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust the floating distance */
+  }
+}

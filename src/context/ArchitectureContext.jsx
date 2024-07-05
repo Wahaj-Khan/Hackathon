@@ -7,7 +7,8 @@ export const useGeneratedArchitecture = () => useContext(ArchitectureContext);
 export const GeneratedArchitectureProvider = ({ children }) => {
   const [generatedArchitecture, setGeneratedArchitecture] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [errorFlag, setErrorFlag] = useState(false);
+  const [errorMessage, SetErrorMessage] = useState(false);
   return (
     <ArchitectureContext.Provider
       value={{
@@ -15,6 +16,10 @@ export const GeneratedArchitectureProvider = ({ children }) => {
         setGeneratedArchitecture,
         isLoading,
         setIsLoading,
+        errorFlag,
+        setErrorFlag,
+        errorMessage,
+        SetErrorMessage,
       }}
     >
       {children}

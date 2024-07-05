@@ -1,0 +1,26 @@
+[
+  {
+    "name": "project1",
+    "description": "Real-Time Collaboration Platform: Develop a comprehensive platform to address the challenges of globalized teams by enabling real-time editing of documents, spreadsheets, and presentations, alongside integrated communication features like video conferencing and chat. Non-functional requirements include scalability to support 100,000 concurrent users, low latency (<100ms) for updates, GDPR-compliant security with end-to-end encryption, 99.999% uptime, and a user-friendly interface for both desktop and mobile. Expected to handle peak traffic of 10,000 concurrent users initially, with a budget of $500,000 and a timeline of MVP in 6 months, full release in 12 months. Examples include Google Workspace and Microsoft Office 365."
+  },
+  {
+    "name": "project2",
+    "description": "Personal Blogging Platform: Build a straightforward blogging platform that allows individuals to publish and customize personal blogs with text, images, and media. Requirements include quick loading times, user authentication for security, and 99.9% uptime. Expecting up to 1,000 active bloggers, with a budget of $20,000 and a timeline of MVP in 3 months, full release in 4 months. Examples include simplified versions of WordPress.com and Medium."
+  },
+  {
+    "name": "project3",
+    "description": "Local Event Management Platform: Create a lightweight platform to help local event organizers manage listings and attendee registrations effectively. Functionalities include event creation with location and ticketing details, and a simple registration process. Non-functional requirements include responsive UI, basic user authentication with data encryption, and 99.9% uptime during peak registration periods. Expecting up to 1,000 registrations per event, with a budget of $15,000 and a timeline of MVP in 2 months, full release in 3 months. Examples include simplified versions of Eventbrite and Meetup."
+  },
+  {
+    "name": "project4",
+    "description": "Recipe Sharing Community Platform: Develop a user-friendly platform for cooking enthusiasts to share and discover recipes, featuring recipe creation with photos and instructions, community interaction through likes, comments, and bookmarks, fast loading times for recipe pages, basic user authentication, and 99% uptime. Initial traffic expectation is 500 active users, with a budget of $25,000 and a timeline of MVP in 3 months, full release in 5 months. Examples include simplified versions of AllRecipes and Food52."
+  },
+  {
+    "name": "project5",
+    "description": "Small Online Shop for Handcrafted Goods: Develop an e-commerce platform tailored for local artisans to sell handcrafted goods online, featuring product listings with descriptions and pricing, a seamless shopping cart and checkout process, SSL encryption for security, and 99% uptime. Scalable to handle 500 concurrent users, with an initial target of 100 transactions per month and plans to scale as awareness grows. Budgeted at $30,000, with a timeline of MVP in 3 months, full release in 6 months. Examples include Etsy and Shopify."
+  },
+  {
+    "name": "project6",
+    "description": "Online Portfolio for Freelancers: Create a user-friendly platform where freelancers can showcase their work through customizable portfolios featuring projects, skills, and client testimonials. Non-functional requirements include scalability to support 10,000 portfolios, quick page loads (<3 seconds), HTTPS encryption for security, and 99.9% uptime. Initial traffic expectation is 1,000 visitors per month, with a budget of $20,000 and a timeline of MVP in 2 months, full release in 4 months. Examples include Behance and Dribbble."
+  }
+]
